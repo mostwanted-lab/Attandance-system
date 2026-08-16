@@ -18,7 +18,7 @@
       setup();
       await Promise.all([loadStudents(), loadAttendance()]);
     } catch (e) {
-      console.error(e); message("Unable to load the dashboard.", "error");
+      console.error(e); message('Unable to load the dashboard: ${e.message || e}', "error");
     } finally { loader.classList.add("hidden"); }
   }
 
