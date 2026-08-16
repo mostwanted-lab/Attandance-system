@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Attendance | Admin</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="app-loader" class="screen-loader"><div class="spinner"></div><span>Loading dashboard…</span></div>
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark">A</span><div><strong>Attendance</strong><small>Admin Dashboard</small></div></div>
+    <button id="logout-btn" class="btn ghost" type="button">Log out</button>
+  </header>
+
+  <main class="dashboard">
+    <section class="page-intro">
+      <div><p class="eyebrow">Administration</p><h1>Attendance dashboard</h1><p>Manage students and review daily attendance.</p></div>
+      <div id="global-message" class="message" role="alert"></div>
+    </section>
+
+    <section class="stats-grid">
+      <article class="stat-card"><span>Total students</span><strong id="total-students">—</strong></article>
+      <article class="stat-card"><span>Present today</span><strong id="present-today">—</strong></article>
+      <article class="stat-card"><span>Absent today</span><strong id="absent-today">—</strong></article>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head"><div><h2>Students</h2><p>Add, edit, or remove student accounts.</p></div><button id="add-student-btn" class="btn primary" type="button">+ Add student</button></div>
+      <div class="table-wrap">
+        <table><thead><tr><th>Student ID</th><th>Name</th><th>Actions</th></tr></thead><tbody id="students-body"></tbody></table>
+      </div>
+      <div id="students-empty" class="empty hidden">No students have been added yet.</div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head"><div><h2>Attendance</h2><p>Every student has a Present or Absent status for each date.</p></div>
+        <div class="filter-row"><label for="attendance-date">Date</label><input id="attendance-date" type="date"></div>
+      </div>
+      <div class="table-wrap">
+        <table><thead><tr><th>Student ID</th><th>Name</th><th>Date</th><th>Status</th></tr></thead><tbody id="attendance-body"></tbody></table>
+      </div>
+      <div id="attendance-empty" class="empty hidden">No attendance records for this date.</div>
+    </section>
+  </main>
+
+  <dialog id="student-dialog">
+    <form id="student-form" class="dialog-card" method="dialog" novalidate>
+      <div class="dialog-head"><div><p class="eyebrow" id="dialog-eyebrow">Student</p><h2 id="dialog-title">Add student</h2></div><button id="dialog-close" class="icon-btn" type="button" aria-label="Close">×</button></div>
+      <input id="original-student-id" type="hidden">
+      <label for="form-student-id">Student ID</label>
+      <input id="form-student-id" type="text" placeholder="STU001" required>
+      <small id="student-id-help" class="field-help">Use the format STU001, STU002, etc.</small>
+      <label for="form-name">Student name</label>
+      <input id="form-name" type="text" placeholder="Full name" required>
+      <label for="form-password">Password / access code</label>
+      <input id="form-password" type="password" placeholder="Enter access code" required>
+      <small id="password-help" class="field-help">Required when adding. Leave unchanged when editing.</small>
+      <p id="form-message" class="message" role="alert"></p>
+      <div class="dialog-actions"><button id="cancel-btn" class="btn ghost" type="button">Cancel</button><button class="btn primary" type="submit">Save student</button></div>
+    </form>
+  </dialog>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

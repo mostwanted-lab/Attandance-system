@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Attendance | Admin Login</title><link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<main class="auth-shell"><section class="auth-card">
+  <div class="brand"><span class="brand-mark">A</span><div><strong>Attendance</strong><small>Administrator</small></div></div>
+  <div class="card-heading"><p class="eyebrow">Secure access</p><h1>Admin Login</h1><p>Sign in to manage students and attendance.</p></div>
+  <form id="admin-login-form" novalidate>
+    <label for="email">Admin email</label><input id="email" type="email" autocomplete="username" required>
+    <label for="password">Password</label><input id="password" type="password" autocomplete="current-password" required>
+    <button class="btn primary full" type="submit">Sign in</button><p id="admin-message" class="message" role="alert"></p>
+  </form>
+  <a class="text-link" href="index.html">← Student login</a>
+</section></main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="js/config.js"></script>
+<script>
+const c=window.ATTENDANCE_CONFIG,m=document.getElementById("admin-message"),f=document.getElementById("admin-login-form");
+if(!c?.SUPABASE_URL||!c?.SUPABASE_ANON_KEY){m.textContent="Configure Supabase in js/config.js first.";m.className="message error";}
+else{const sb=window.supabase.createClient(c.SUPABASE_URL,c.SUPABASE_ANON_KEY);f.addEventListener("submit",async e=>{e.preventDefault();const b=f.querySelector("button");b.disabled=true;b.textContent="Signing in…";m.textContent="";try{const {data,error}=await sb.auth.signInWithPassword({email:document.getElementById("email").value.trim(),password:document.getElementById("password").value});if(error)throw error;const {data:p,error:pe}=await sb.from("admin_profiles").select("id").eq("id",data.user.id).maybeSingle();if(pe||!p){await sb.auth.signOut();throw new Error("This account is not an authorized administrator.");}location.replace("admin.html");}catch(err){m.textContent=err.message||"Admin login failed.";m.className="message error";}finally{b.disabled=false;b.textContent="Sign in";}});}
+</script>
+</body></html>

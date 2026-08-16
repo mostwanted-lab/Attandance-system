@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Attendance | Login</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main class="auth-shell">
+    <section class="auth-card">
+      <div class="brand"><span class="brand-mark">A</span><div><strong>Attendance</strong><small>Student Portal</small></div></div>
+      <div class="card-heading">
+        <p class="eyebrow">Daily attendance</p>
+        <h1>Student Login</h1>
+        <p>Sign in to record your attendance for today.</p>
+      </div>
+      <form id="student-login-form" novalidate>
+        <label for="student-id">Student ID</label>
+        <input id="student-id" name="studentId" type="text" placeholder="e.g. STU001" autocomplete="username" required>
+        <label for="student-password">Password / access code</label>
+        <input id="student-password" name="password" type="password" placeholder="Enter your access code" autocomplete="current-password" required>
+        <button class="btn primary full" type="submit">Sign in</button>
+        <p id="login-message" class="message" role="alert"></p>
+      </form>
+      <a class="text-link" href="admin.html">Administrator login →</a>
+    </section>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/student.js"></script>
+</body>
+</html>
