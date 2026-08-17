@@ -19,7 +19,9 @@
       await Promise.all([loadStudents(), loadAttendance()]);
     } catch (e) {
       console.error(e); message("Unable to load the dashboard: " + (e.message || e), "error");
-    } finally { loader.classList.add("hidden"); }
+    } finally { loader.classList.add("hidden");
+              loader.style.display = "none";
+              }
   }
 
   function setup() {
